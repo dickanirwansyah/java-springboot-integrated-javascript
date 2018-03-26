@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring
+    username: spring
+    password: root
+  jpa:
+    generate-ddl: true
+    show-sql: true

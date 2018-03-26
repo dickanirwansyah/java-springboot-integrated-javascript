@@ -1,0 +1,90 @@
+<div class="page-header" ng-controller="categoryController">
+    <h3>{{title}}</h3>
+
+    <button class="btn btn-primary" ng-click="openCategory()" data-target="#formCategory" data-toggle="modal">
+        <span class="glyphicon glyphicon-plus"></span>
+        Add Data
+    </button>
+
+    <!--modal category-->
+    <div class="modal fade" tabindex="-1" id="formCategory" aria-hidden="true">
+        <div class="modal-dialog" role="dialog">
+            <div class="modal-content" role="document">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="form-category">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Name :</label>
+                            <div class="col-lg-5">
+                                <input type="hidden" ng-model="selectedCategory['idcategory']">
+                                <input type="text" class="form-control"
+                                       ng-model="selectedCategory['name']" name="name" placeholder="Name of Category"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button  ng-if="selectedCategory['idcategory']== null" type="button" class="btn btn-primary"
+                             ng-click="simpanCategory()">
+                        <span class="glyphicon glyphicon-save"></span>
+                        Saved
+                    </button>
+                    <button ng-if="selectedCategory['idcategory'] != null" type="button"
+                            ng-click="updatedCategory()" class="btn btn-default">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        Updated
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                        Canceled
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal category-->
+
+
+    <div class="page-header">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Opsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="category in categorys">
+                    <td>{{$index + 1}}</td>
+                    <td>{{category.idcategory}}</td>
+                    <td>{{category.name}}</td>
+                    <td>
+                        <button class="btn btn-primary"
+                                data-target="#formCategory"
+                                data-toggle="modal"
+                                ng-click="updateCategory(category)" >
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button class="btn btn-danger">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>No</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Opsi</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
