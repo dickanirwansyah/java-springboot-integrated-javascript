@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thyemeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:utext="${title}"></title>
+    <link rel="stylesheet" href="/css/custom-modal.css"/>
+</head>
+<th:block th:include="/fragments/header"></th:block>
+<br/>
+<body>
+    <div class="container">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="page-header">
+                <h3>Data Buku</h3>
+            </div>
+            <button class="btn btn-primary" onclick="newbook()">
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                New Book
+            </button>
+            <div class="page-header">
+            <table class="table table-hover table-striped" id="tabelbook">
+                <thead>
+                    <tr>
+                        <th>ISBN</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Quantity</th>
+                        <th>Category</th>
+                        <th>Disabled</th>
+                        <th>Opsi</th>
+                    </tr>
+                </thead>
+                <!--
+                <tbody>
+                    <tr th:each="buku,itrStat : ${books}">
+                        <th th:utext="${itrStat.count}"></th>
+                        <th th:utext="${buku.title}"></th>
+                        <th th:utext="${buku.author}"></th>
+                        <th th:utext="${buku.quantity}"></th>
+                        <th th:utext="${buku.category.name}"></th>
+                        <th th:utext="${buku.disabled}"></th>
+                    </tr>
+                </tbody>
+                -->
+                <tbody>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                    <tr>
+                        <th>ISBN</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Quantity</th>
+                        <th>Category</th>
+                        <th>Disabled</th>
+                        <th>Opsi</th>
+                    </tr>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <!--modal-->
+    <div class="modal fade" id="modal-book" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="dialog">
+            <div class="modal-content" role="document">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">
+                        <span aria-hidden="true">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="form-book">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Title:</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control"
+                                      name="title" id="title" placeholder="Title" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Author:</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control"
+                                        name="author" id="author" placeholder="Author" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Quantity:</label>
+                            <div class="col-lg-5">
+                                <input type="number" class="form-control"
+                                     name="quantity" id="quantity" placeholder="Quantity"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Price:</label>
+                            <div class="col-lg-5">
+                                <input type="number" class="form-control"
+                                       name="price" id="price" placeholder="Price"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Category:</label>
+                            <div class="col-lg-5">
+
+                                <input type="hidden" name="idcategory" id="idcategory"/>
+                                <input type="text" class="form-control" id="namecategory"
+                                       placeholder="Category" readonly=""/>
+                            </div>
+                            <div class="col-lg-2">
+                                <button type="button" class="btn btn-default" id="modal-list">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                    <b>Search!</b>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!--
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Category:</label>
+                            <div class="col-lg-5">
+                                <select class="form-control" id="idcategory">
+                                    <option value="">-Pilih Salah Satu-</option>
+                                </select>
+                            </div>
+                        </div>
+                        -->
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="insert_book()">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        Created
+                    </button>
+                    <button class="btn btn-default" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal-->
+
+    <!--list category-->
+        <div class="modal fade" id="modal-list-category" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog" role="dialog">
+                <div class="modal-content" role="document">
+                    <div class="modal-header">
+                        <button class="close" data-dismiss="modal">
+                            <span aria-hidden="true">close</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-hover table-striped"
+                               id="tabel-list-category">
+                            <thead>
+                                <tr>
+                                    <th width="200">Name</th>
+                                    <th width="200">Status</th>
+                                    <th width="200">Opsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th width="200">Name</th>
+                                    <th width="200">Status</th>
+                                    <th width="200">Opsi</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--list category-->
+</body>
+</html>
