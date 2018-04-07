@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:utext="${title}"></title>
+</head>
+<th:block th:include="fragments/navbar"></th:block>
+<br/>
+<br/>
+<body>
+	<div class="container">
+		<div class="container-fluid">
+			<div class="col-lg-10 col-lg-offset-1">
+				<div class="page-header">
+					<h3>Book</h3>
+				</div>
+				<button class="btn btn-primary">
+					<span class="glyphicon glyphicon-plus-sign"></span>
+					Add Data
+				</button>
+				<div class="page-header">
+					<table class="table table-hover table-striped table-bordered" id="tabel-book">
+						<thead>
+							<tr>
+								<th>ISBN</th>
+								<th>Title</th>
+								<th>Author</th>
+								<th>Quantity</th>
+								<th>Price</th>
+								<th>Category</th>
+								<th>Status</th>
+								<th>Opsi</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>ISBN</th>
+								<th>Title</th>
+								<th>Author</th>
+								<th>Quantity</th>
+								<th>Price</th>
+								<th>Category</th>
+								<th>Status</th>
+								<th>Opsi</th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

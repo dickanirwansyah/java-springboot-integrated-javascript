@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:utext="${title}"></title>
+</head>
+<th:block th:include="fragments/navbar"></th:block>
+<br/>
+<br/>
+<body>
+    <div class="container">
+        <div class="container-fluid">
+            <div class="col-lg-10 col-lg-offset-1">
+                <div class="page-header">
+                    <h3>Category</h3>
+                </div>
+                <button class="btn btn-primary" onclick="openModalCategory()">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    Add Data
+                </button>
+                
+                <!-- modal category -->
+                <div class="modal fade" id="modalCategory" tabindex="-1" aria-hidden="true">
+                	<div class="modal-dialog" role="dialog">
+                		<div class="modal-content" role="document">
+                			<div class="modal-header">
+                				<button class="close" data-dismiss="modal">
+                					<span aria-hidden="true">Close</span>
+                				</button>
+                			</div>
+                			<div class="modal-body">
+                				<form class="form-horizontal" id="formCategory">
+                					<div class="form-group">
+                						<label class="col-lg-3 control-label">Nama:</label>
+                						<div class="col-lg-5">
+                							<input type="hidden" class="form-control" name="idcategory" id="idcategory_of_category" />
+                							<input type="text" class="form-control" name="name" id="name_of_category" 
+                							placeholder="Name"/>
+                						</div>
+                					</div>
+                				</form>
+                			</div>
+                			<div class="modal-footer">
+                				<button class="btn btn-primary saved">
+                					<span class="glyphicon glyphicon-save"></span>
+                					Save
+                				</button>
+                				<button class="btn btn-default" data-dismiss="modal">
+                					<span class="glyphicon glyphicon-refresh"></span>
+                					Cancel
+                				</button>
+                			</div>
+                		</div>
+                	</div>
+                </div>
+                <!-- modal category -->
+                
+                <!-- modal category update -->
+                <div class="modal fade" id="modalCategoryUpdate" tabindex="-1" aria-hidden="true">
+                	<div class="modal-dialog" role="dialog">
+                		<div class="modal-content" role="document">
+                			<div class="modal-header">
+                				<button class="close" data-dismiss="modal">
+                					<span aria-hidden="true">Close</span>
+                				</button>
+                			</div>
+                			<div class="modal-body">
+                				<form class="form-horizontal" id="formCategoryUpdate">
+                					<div class="form-group">
+                						<label class="col-lg-3 control-label">Idcategory:</label>
+                						<div class="col-lg-5">
+                							<input type="text" class="form-control" 
+                							name="idcategory" id="update_idcategory" readonly="true"/>
+                						</div>
+                					</div>
+                					<div class="form-group">
+                						<label class="col-lg-3 control-label">Name:</label>
+                						<div class="col-lg-5">
+                							<input type="text" class="form-control" 
+                							name="name" id="update_name"/>
+                						</div>
+                					</div>
+                					<div class="form-group">
+                						<label class="col-lg-3 control-label">Status :</label>
+                						<div class="col-lg-5">
+                							<select class="form-control" name="disabled" 
+                							id="update_disabled">
+                								<option value="">Pilih Salah Satu</option>
+                								<option value="true">True</option>
+                								<option value="false">False</option>
+                							</select>
+                						</div>
+                					</div>
+                				</form>
+                			</div>
+                			<div class="modal-footer">
+                				<button class="btn btn-primary edited">
+                					<span class="glyphicon glyphicon-save"></span>
+                					Update
+                				</button>
+                				<button class="btn btn-default" data-dismiss="modal">
+                					<span class="glyphicon glyphicon-refresh"></span>
+                					Cancel
+                				</button>
+                			</div>
+                		</div>
+                	</div>
+                </div>
+                <!-- modal category update -->
+                
+                <div class="page-header">
+                    <table class="table table-hover table-bordered table-striped" id="tabel-category">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Opsi</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

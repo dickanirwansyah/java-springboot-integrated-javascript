@@ -1,0 +1,8 @@
+#KONFIGURASI SPRING BOOT
+
+server:
+  port: 8080
+
+spring:
+  jpa:
+    generate-ddl: true
