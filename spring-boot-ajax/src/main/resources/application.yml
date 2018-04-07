@@ -1,8 +1,10 @@
 #KONFIGURASI SPRING BOOT
 
-server:
-  port: 8080
-
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springboot
+    username: springboot
+    password: root
   jpa:
     generate-ddl: true
+    show-sql: true
