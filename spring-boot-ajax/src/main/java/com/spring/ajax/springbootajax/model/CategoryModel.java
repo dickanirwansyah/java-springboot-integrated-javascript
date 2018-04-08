@@ -6,8 +6,8 @@ public class CategoryModel {
     private String idcategory;
     private String name;
     private boolean disabled;
-
-
+    
+    
     public String getIdcategory(){
         return idcategory;
     }

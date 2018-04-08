@@ -9,6 +9,72 @@ function reloadCategory(){
 	$("#tabel-category").DataTable().ajax.reload();
 }
 
+//reload book
+function reloadBook(){
+    $("#tabel-book").DataTable().ajax.reload();
+}
+
+//open modal buku
+function openBuku(){
+	$("#modalbook").modal('show');
+	$("#formBook")[0].reset();
+}
+
+//list category modal
+$(document).on('click', '.getid', function(){
+    $("#modal_list").modal('show');
+});
+
+//save book
+$(document).on('click', '.savedbook', function(){
+
+    var title = $("#title_book").val();
+    var author = $("#author_book").val();
+    var price = $("#price_book").val();
+    var quantity = $("#quantity_book").val();
+    var idcategory = $("#category_idcategory").val();
+
+    $.ajax({
+        type: 'POST',
+        url: '/api/book/created/'+idcategory,
+        data: JSON.stringify({
+            title: title,
+            author: author,
+            price: price,
+            quantity: quantity,
+            idcategory: idcategory
+        }),
+        contentType: "application/json;charset=UTF-8",
+        dataType: 'JSON',
+
+        complete:function(){
+            reloadBook();
+            alert('data berhasil disimpan');
+            $("#modalbook").modal('hide');
+        }
+    });
+
+});
+
+//ambil category
+$(document).on('click', '.ambil', function(){
+
+    var idcategory = $(this).attr("data-id");
+
+    $.ajax({
+        url : '/api/category/'+idcategory,
+        method: 'GET',
+        success: function(response){
+            document.getElementById("category_idcategory").value = response.idcategory;
+            document.getElementById("category_nama").value = response.name;
+            console.log("ambil data : "+response.idcategory +" | "+response.name);
+            $("#modal_list").modal('hide');
+            alert("data "+response.name+" berhasil diambil");
+        }
+    });
+
+});
+
 $(document).on('click', '.saved', function(){
 	
 	var name = $("#name_of_category").val();
@@ -73,6 +139,8 @@ $(document).on('click', '.editCategory', function(){
 });
 
 
+
+
 $(document).ready(function(){
 	
 	var tabelBook = $("#tabel-book");
@@ -129,6 +197,43 @@ $(document).ready(function(){
 		});
 	}
 	
+});
+
+//list category
+$(document).ready(function(){
+
+    var listcategory = $("#listcategory");
+
+    if(listcategory.length){
+
+        listcategory.DataTable({
+            lengthMenu: [[3, 5, -1], ['show 3', 'show 5', 'show all']],
+            pageLength: 3,
+            ajax:{
+                url: '/api/category',
+                dataSrc: ''
+            },
+            columns:[
+                {
+                    data: 'name'
+                },
+                {
+                    data: 'idcategory',
+                    bSortable: false,
+                    mRender:function(data, type, row){
+
+                        var str = "";
+
+                        str += "<button class='btn btn-default ambil' data-id='"+data+"'><span class='glyphicon glyphicon-plus-sign'>";
+                        str += "</span>Ambil</button>";
+
+                        return str;
+                    }
+                }
+            ]
+        });
+    }
+
 });
 
 
